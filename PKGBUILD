@@ -11,7 +11,8 @@ license=('GPL3')
 depends=('dbus' 'libgudev' 'openssl')
 makedepends=('cargo' 'git' 'gtk3')
 options=('!lto')
-source=('git+https://github.com/pop-os/firmware-manager.git'
+_commit=96a107f0ea5e6df6d37cbd896440273edb2c34f6
+source=("git+https://github.com/pop-os/firmware-manager.git#commit=$_commit"
         'com.system76.FirmwareManager.policy'
         "$pkgbase.sh")
 sha256sums=('SKIP'
@@ -26,7 +27,7 @@ pkgver() {
 prepare() {
   cd "$srcdir/$pkgbase"
   export RUSTUP_TOOLCHAIN=stable
-  cargo fetch --target "$CARCH-unknown-linux-gnu"
+#  cargo fetch --target "$CARCH-unknown-linux-gnu"
 }
 
 build() {
