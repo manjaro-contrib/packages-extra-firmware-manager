@@ -2,7 +2,7 @@
 
 pkgname=('firmware-manager' 'libfirmware-manager')
 pkgbase=firmware-manager
-pkgver=0.1.2+37+g96a107f
+pkgver=0.1.2+49+g0b24411
 pkgrel=1
 pkgdesc="Generic framework and GTK UI for firmware updates from system76-firmware and fwupd"
 arch=('x86_64' 'aarch64')
@@ -11,7 +11,7 @@ license=('GPL3')
 depends=('dbus' 'libgudev' 'openssl')
 makedepends=('cargo' 'git' 'gtk3')
 options=('!lto')
-_commit=96a107f0ea5e6df6d37cbd896440273edb2c34f6
+_commit=0b244118fc2a22b4fd149b1919d5a428ed919570
 source=("git+https://github.com/pop-os/firmware-manager.git#commit=$_commit"
         'com.system76.FirmwareManager.policy'
         "$pkgbase.sh")
