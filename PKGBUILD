@@ -3,13 +3,13 @@
 pkgname=('firmware-manager' 'libfirmware-manager')
 pkgbase=firmware-manager
 pkgver=0.1.2+49+g0b24411
-pkgrel=1
+pkgrel=2
 pkgdesc="Generic framework and GTK UI for firmware updates from system76-firmware and fwupd"
 arch=('x86_64' 'aarch64')
 url="https://github.com/pop-os/firmware-manager"
 license=('GPL3')
 depends=('dbus' 'libgudev' 'openssl')
-makedepends=('cargo' 'git' 'gtk3')
+makedepends=('cargo' 'git' 'gtk3' 'setconf')
 options=('!lto')
 _commit=0b244118fc2a22b4fd149b1919d5a428ed919570
 source=("git+https://github.com/pop-os/firmware-manager.git#commit=$_commit"
@@ -43,12 +43,14 @@ package_firmware-manager() {
   install="$pkgname.install"
 
   cd "$srcdir/$pkgbase"
-  make DESTDIR="$pkgdir/" install-{bin,notify,icons} prefix=/usr
+  make prefix=/usr DESTDIR="$pkgdir/" install-{bin,notify,icons}
 
   install -Dm644 "$srcdir/com.system76.FirmwareManager.policy" -t \
     "$pkgdir/usr/share/polkit-1/actions"
 
   install -Dm755 "$srcdir/$pkgname.sh" "$pkgdir/usr/bin/$pkgname"
+
+  setconf "$pkgdir/usr/share/applications/com.system76.FirmwareManager.desktop" Exec "$pkgname"
 }
 
 package_libfirmware-manager() {
@@ -58,5 +60,5 @@ package_libfirmware-manager() {
   provides=('libfirmware_manager.so')
 
   cd "$srcdir/$pkgbase"
-  make DESTDIR="$pkgdir/" install-ffi prefix=/usr
+  make prefix=/usr DESTDIR="$pkgdir/" install-ffi
 }
