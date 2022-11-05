@@ -3,7 +3,7 @@
 pkgname=('firmware-manager' 'libfirmware-manager')
 pkgbase=firmware-manager
 pkgver=0.1.2+50+g3b827d1
-pkgrel=1
+pkgrel=2
 pkgdesc="Generic framework and GTK UI for firmware updates from system76-firmware and fwupd"
 arch=('x86_64' 'aarch64')
 url="https://github.com/pop-os/firmware-manager"
