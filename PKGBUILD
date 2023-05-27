@@ -26,12 +26,14 @@ pkgver() {
 
 prepare() {
   cd "$srcdir/$pkgbase"
+  export CARGO_HOME="$srcdir/cargo-home"
   export RUSTUP_TOOLCHAIN=stable
   cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
 }
 
 build() {
   cd "$srcdir/$pkgbase"
+  export CARGO_HOME="$srcdir/cargo-home"
   export RUSTUP_TOOLCHAIN=stable
   make prefix=/usr
 }
