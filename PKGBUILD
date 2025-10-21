@@ -16,8 +16,8 @@ depends=(
   'polkit'
 )
 makedepends=(
-  'cargo'
   'git'
+  'rust'
 )
 optdepends=(
   'fwupd: Generic firmware updates'
@@ -41,14 +41,12 @@ pkgver() {
 
 prepare() {
   cd "$pkgname"
-  export RUSTUP_TOOLCHAIN=stable
   cargo fetch --target "$(rustc -vV | sed -n 's/host: //p')"
 }
 
 build() {
   cd "$pkgname"
   CFLAGS+=" -ffat-lto-objects"
-  export RUSTUP_TOOLCHAIN=stable
   make prefix=/usr
 }
 
