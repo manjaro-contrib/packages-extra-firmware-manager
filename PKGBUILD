@@ -41,7 +41,7 @@ pkgver() {
 
 prepare() {
   cd "$pkgname"
-  cargo fetch --target "$(rustc -vV | sed -n 's/host: //p')"
+  cargo fetch --target host-tuple
 }
 
 build() {
@@ -62,4 +62,3 @@ package() {
   desktop-file-edit --set-key=Exec --set-value="$pkgname" \
     "$pkgdir/usr/share/applications/${_app_id}.desktop"
 }
-
